@@ -10,6 +10,8 @@ class ListNotes extends Component {
           return (
             <li className='list-notes_item' key={index}>
               <NoteCard
+                index={index}
+                deleteNote={this.props.deleteNote}
                 title={note.title}
                 text={note.text}
               />
