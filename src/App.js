@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ListNotes from './components/ListNotes'
 import RegistrationForm from './components/RegistrationForm'
+import ListCategories from './components/ListCategories'
 import './assets/App.css'
 import './assets/index.css'
 
@@ -9,7 +10,8 @@ class App extends Component {
     super()
 
     this.state = {
-      notes: []
+      notes: [],
+      categories: [],
     }
   }
 
@@ -27,13 +29,26 @@ class App extends Component {
     })
   }
 
+  addCategory(name){
+    this.setState({
+      categories: [...this.state.categories, name]
+    })
+  }
+
   render () {
     return (
       <section className='content'>
         <RegistrationForm addNote={this.addNote.bind(this)} />
-        <ListNotes
-          notes={this.state.notes}
-          deleteNote={this.deleteNote.bind(this)} />
+        <main className='main-content'>
+          <ListCategories
+            categories={this.state.categories}
+            addCategory={this.addCategory.bind(this)} />
+
+          <ListNotes
+            notes={this.state.notes}
+            deleteNote={this.deleteNote.bind(this)} />
+        </main>
+
       </section>
     )
   }
