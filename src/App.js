@@ -15,9 +15,9 @@ class App extends Component {
     }
   }
 
-  addNote(title, text) {
+  addNote(title, text, category) {
     this.setState({
-      notes: [...this.state.notes, { title, text }]
+      notes: [...this.state.notes, { title, text, category }]
     })
   }
 
@@ -38,7 +38,9 @@ class App extends Component {
   render () {
     return (
       <section className='content'>
-        <RegistrationForm addNote={this.addNote.bind(this)} />
+        <RegistrationForm
+          addNote={this.addNote.bind(this)}
+          categories={this.state.categories} />
         <main className='main-content'>
           <ListCategories
             categories={this.state.categories}

@@ -7,7 +7,7 @@ class RegistrationForm extends Component {
 
     this.title = ''
     this.text = ''
-
+    this.category = 'Undefined Category'
   }
 
   _handleChangeTitle(event) {
@@ -22,15 +22,28 @@ class RegistrationForm extends Component {
     this.text = event.target.value
   }
 
+  _handleChangeCategory(event) {
+    event.stopPropagation()
+
+    this.category = event.target.value
+  }
+
   _handleSubmit(event) {
     event.preventDefault()
     event.stopPropagation()
-    this.props.addNote(this.title, this.text)
+
+    this.props.addNote(this.title, this.text, this.category)
   }
 
   render() {
     return (
       <form className='registration-form' onSubmit={this._handleSubmit.bind(this)}>
+        <select className='registration-form_input' onChange={this._handleChangeCategory.bind(this)}>
+          <option>Undefined Category</option>
+          {this.props.categories.map((category, index) => {
+            return <option key={index}>{category}</option>
+          })}
+        </select>
         <input
           type='text'
           placeholder='Title'
