@@ -7,14 +7,20 @@ export default class AllNotes {
   addNote(title, text, category){
     const newNote = new Note(title, text, category)
     this.items.push(newNote)
+    this.notify()
   }
 
   deleteNote(index){
     this.items.splice(index, 1)
+    this.notify()
   }
 
   register(func){
     this._registered.push(func)
+  }
+
+  unregister(func){
+    this._registered = this._registered.filter(f => f !== func)
   }
 
   notify(){

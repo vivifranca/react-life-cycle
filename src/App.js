@@ -20,14 +20,14 @@ class App extends Component {
       <section className='content'>
         <RegistrationForm
           addNote={this.notes.addNote.bind(this.notes)}
-          categories={this.categories.items} />
+          categories={this.categories} />
         <main className='main-content'>
           <ListCategories
-            categories={this.categories.items}
+            categories={this.categories}
             addCategory={this.categories.addCategory.bind(this.categories)} />
 
           <ListNotes
-            notes={this.notes.items}
+            notes={this.notes}
             deleteNote={this.notes.deleteNote.bind(this.notes)} />
         </main>
 

@@ -8,6 +8,20 @@ class RegistrationForm extends Component {
     this.title = ''
     this.text = ''
     this.category = 'Undefined Category'
+    this.state = { categories: this.props.categories.items }
+    this._newCategories = this._newCategories.bind(this)
+  }
+
+  componentDidMount(){
+    this.props.categories.register(this._newCategories)
+  }
+
+  componentWillUnmount(){
+    this.props.categories.unregister(this._newCategories)
+  }
+
+  _newCategories(categories){
+    this.setState({ ...this.state, categories})
   }
 
   _handleChangeTitle(event) {
@@ -40,7 +54,7 @@ class RegistrationForm extends Component {
       <form className='registration-form' onSubmit={this._handleSubmit.bind(this)}>
         <select className='registration-form_input' onChange={this._handleChangeCategory.bind(this)}>
           <option>Undefined Category</option>
-          {this.props.categories.map((category, index) => {
+          {this.state.categories.map((category, index) => {
             return <option key={index}>{category}</option>
           })}
         </select>
