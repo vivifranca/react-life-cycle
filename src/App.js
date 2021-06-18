@@ -4,51 +4,31 @@ import RegistrationForm from './components/RegistrationForm'
 import ListCategories from './components/ListCategories'
 import './assets/App.css'
 import './assets/index.css'
+import Categories from './data/Categories'
+import AllNotes from './data/AllNotes'
 
 class App extends Component {
   constructor(){
     super()
 
-    this.state = {
-      notes: [],
-      categories: [],
-    }
-  }
-
-  addNote(title, text, category) {
-    this.setState({
-      notes: [...this.state.notes, { title, text, category }]
-    })
-  }
-
-  deleteNote(index){
-    let arrayOfNotes = this.state.notes
-    arrayOfNotes.splice(index, 1)
-    this.setState({
-      notes: arrayOfNotes
-    })
-  }
-
-  addCategory(name){
-    this.setState({
-      categories: [...this.state.categories, name]
-    })
+    this.categories = new Categories()
+    this.notes = new AllNotes()
   }
 
   render () {
     return (
       <section className='content'>
         <RegistrationForm
-          addNote={this.addNote.bind(this)}
-          categories={this.state.categories} />
+          addNote={this.notes.addNote.bind(this.notes)}
+          categories={this.categories.items} />
         <main className='main-content'>
           <ListCategories
-            categories={this.state.categories}
-            addCategory={this.addCategory.bind(this)} />
+            categories={this.categories.items}
+            addCategory={this.categories.addCategory.bind(this.categories)} />
 
           <ListNotes
-            notes={this.state.notes}
-            deleteNote={this.deleteNote.bind(this)} />
+            notes={this.notes.items}
+            deleteNote={this.notes.deleteNote.bind(this.notes)} />
         </main>
 
       </section>
